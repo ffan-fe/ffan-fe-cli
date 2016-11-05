@@ -1,0 +1,11 @@
+{
+  "framework": "vue",
+  "px2rem": {
+    "remUnit": 75,
+    "remPrecision": 8
+  },
+  "html": {
+    "title": "Sample Title",
+    "track": "SAMPLE_TRACK"
+  }
+}
