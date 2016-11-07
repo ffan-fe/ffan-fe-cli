@@ -1,16 +1,11 @@
 import run from './run';
 //import clean from './clean';
-import watch from './watch';
 //import copy from './copy';
 import server from './server';
-import {getConfig} from './lib/validEntry';
+import { getConfig } from './lib/validEntry';
 
 
 export default async function start(_sourceDir) {
-  console.log('ssdfsdfsd dstart');
-  await 1;
-
-
   try {
     const sourceDir = _sourceDir || process.argv[3];
 
@@ -19,19 +14,17 @@ export default async function start(_sourceDir) {
       return
     }
 
-
-
-    // TODO:
-    //const entries = await getEntry(sourceDir);
     const config = await getConfig(sourceDir);
-    // 1. clean
-    // 2. server
-    //await run(clean.bind(undefined, sourceDir));
-    //await run(copy.bind(undefined, 'tmp'));
-    //console.log(process.cwd());
 
-    const serverConfig = await run(watch, config);
-    //await run(server.bind(undefined, sourceDir, serverConfig));
+    // await run(clean.bind(undefined, sourceDir));
+    // await run(copy.bind(undefined, 'tmp'));
+    // const serverConfig = await run(watch, config);
+
+    await run(server, config);
+
+    // https://github.com/facebookincubator/create-react-app/issues/263
+    // https://github.com/facebookincubator/create-react-app/pull/744
+    // https://github.com/facebookincubator/create-react-app/pull/744/files
   } catch (e) {
     console.log(e);
   }

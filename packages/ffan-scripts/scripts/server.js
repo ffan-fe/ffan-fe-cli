@@ -1,21 +1,41 @@
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import getip from './lib/ip.js';
+import {resolve} from 'path';
 var colors = require('colors');
+import paths from '../config/paths'
+import { getEntry } from './lib/validEntry';
+import getConfig from '../config/webpack.hot.config';
+
+async function watch(config) {
+  const entries = await getEntry(config.name)
+  return  {...{watch: true, entry: entries}, ...getConfig(config)}
+}
 
 const port = 8081;
 
-async function server(sourceDir, config) {
+async function server(config1) {
+
+  let config = await watch(config1);
+
+  const sourceDir = config.name;
+
   for(var key in config.entry){
-    config.entry[key].unshift("webpack-dev-server/client?http://0.0.0.0:"+port+"/", "webpack/hot/dev-server");
+    config.entry[key].unshift(
+      require.resolve("webpack-dev-server/client") + `?http://0.0.0.0:${port}/`,
+      require.resolve("webpack/hot/dev-server"));
   }
 
-  let compiler = webpack({...config});
+  console.log(config.entry)
+
+  let compiler = webpack(config);
 
   var server = new WebpackDevServer(compiler, {
-    contentBase: 'tmp',
+    //contentBase: paths.appDevBuild,
+    clientLogLevel: 'none',
+    quiet: true,
     hot        : true,
-    noInfo     : true,
+    //noInfo     : true,
     proxy      : {
       '/zzq/*'        : {
         target      : "http://h5.sit.ffan.com/",

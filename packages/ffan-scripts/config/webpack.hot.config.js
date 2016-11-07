@@ -5,7 +5,6 @@ import autoprefixer from 'autoprefixer';
 import path from 'path';
 import paths from './paths'
 
-
 export default function getConfig({name, html = {}, px2rem = {}, framework = 'jquery'}) {
 
   // HTML
@@ -20,25 +19,24 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
   };
 
   return {
-    externals: {
+    name         : name,
+    externals    : {
       jquery     : 'jQuery',
       react      : 'React',
       'react-dom': 'ReactDOM',
       vue        : 'Vue',
     },
-
-    output   : {
+    output       : {
       path      : paths.appDevBuild,
       filename  : `assets/js/${name}_[name].js`,
       publicPath: '/newactivity/'
-      // publicPath: 'http://127.0.0.1:8080/'
     },
-    devtool  : "#cheap-module-source-map",
+    devtool      : "#cheap-module-source-map",
     resolveLoader: {
-      root: paths.ownNodeModules,
+      root           : paths.ownNodeModules,
       moduleTemplates: ['*-loader']
     },
-    module   : {
+    module       : {
       noParse: [
         'jquery',
         'react',
