@@ -19,7 +19,7 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
   };
 
   return {
-    name         : name,
+    dirName         : name,
     externals    : {
       jquery     : 'jQuery',
       react      : 'React',
@@ -49,15 +49,18 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
           include: paths.appSrc,
           loaders: ["vue"],
           query  : {
+            extends: paths.ownBabelrc,
             cacheDirectory: true
           }
         },
         {
           test   : /\.(js|jsx)$/,
+          //exclude: /(node_modules|bower_components)/,
           include: paths.appSrc,
           loader : "babel",
           query  : {
-            cacheDirectory: true
+            presets: [require('./babel-presets-ffan')],
+            cacheDirectory: true,
           }
         },
         {

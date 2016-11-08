@@ -1,4 +1,8 @@
 {
-  "presets": ["latest", "react", "stage-3"],
-  "plugins": ["transform-runtime"]
+  "presets": ["latest", "stage-3"],
+  "plugins": [
+    ["transform-runtime", {
+      "regenerator": true
+    }]
+  ]
 }

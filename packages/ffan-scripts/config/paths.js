@@ -17,5 +17,6 @@ export default {
   appSrc        : resolveApp('src'),
   appNodeModules: resolveApp('node_modules'),
   ownNodeModules: resolveOwn('../node_modules'),
-  appDevBuild   : resolveApp('tmp')
+  appDevBuild   : resolveApp('tmp'),
+  ownBabelrc: resolveOwn('../.babelrc'),
 }

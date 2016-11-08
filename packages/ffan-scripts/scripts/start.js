@@ -14,6 +14,8 @@ export default async function start(_sourceDir) {
       return
     }
 
+
+
     const config = await getConfig(sourceDir);
 
     // await run(clean.bind(undefined, sourceDir));
