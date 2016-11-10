@@ -10,7 +10,7 @@ module.exports = {
   ],
   "plugins": [
     [resolve('babel-plugin-transform-runtime'), {
-      "regenerator": true,
+      'regenerator': true,
       // https://github.com/babel/babel/pull/3612
       moduleName: dirname(resolve('babel-runtime/package'))
     }]

@@ -16,7 +16,7 @@ function resolveOwn(relativePath) {
 export default {
   appSrc        : resolveApp('src'),
   appNodeModules: resolveApp('node_modules'),
-  ownNodeModules: resolveOwn('../node_modules'),
   appDevBuild   : resolveApp('tmp'),
-  ownBabelrc: resolveOwn('../.babelrc'),
+  appBuild      : resolveApp('build'),
+  ownNodeModules: resolveOwn('../node_modules'),
 }

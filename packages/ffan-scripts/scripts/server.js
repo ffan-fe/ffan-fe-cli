@@ -14,11 +14,15 @@ async function watch(config) {
 
 const port = 8081;
 
+
+
 async function server(config1) {
 
   let config = await watch(config1);
 
   const sourceDir = config.dirName;
+
+  console.log(config.entry)
 
   for (var key in config.entry) {
     config.entry[key].unshift(
@@ -35,8 +39,8 @@ async function server(config1) {
     }
 
     console.log(stats.toString({
-      //colors  : true,
-      //children: false
+      colors  : true,
+      children: false,
 
       // https://github.com/webpack/webpack/issues/1191#issuecomment-180922894
 
@@ -45,14 +49,13 @@ async function server(config1) {
       timings: false,
       assets: false,
       chunks: false,
-      modules: false,
-      reasons: false,
-      children: false,
-      source: false,
-      errors: false,
-      errorDetails: false,
-      warnings: false,
-      publicPath: false
+      //modules: false,
+      //reasons: false,
+      //source: false,
+      //errors: false,
+      //errorDetails: false,
+      //warnings: false,
+      //publicPath: false
     }));
   });
   var server = new WebpackDevServer(compiler, {

@@ -14,14 +14,11 @@ export default async function start(_sourceDir) {
       return
     }
 
-
-
     const config = await getConfig(sourceDir);
 
     // await run(clean.bind(undefined, sourceDir));
     // await run(copy.bind(undefined, 'tmp'));
     // const serverConfig = await run(watch, config);
-
     await run(server, config);
 
     // https://github.com/facebookincubator/create-react-app/issues/263

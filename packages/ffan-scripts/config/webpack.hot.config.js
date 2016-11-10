@@ -2,7 +2,6 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import webpack from 'webpack';
 import autoprefixer from 'autoprefixer';
-import path from 'path';
 import paths from './paths'
 
 export default function getConfig({name, html = {}, px2rem = {}, framework = 'jquery'}) {
@@ -28,7 +27,8 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
     },
     output       : {
       path      : paths.appDevBuild,
-      filename  : `assets/js/${name}_[name].js`,
+      //path: "adsaf",
+      filename  : `assets/js/${name}/[name].js`,
       publicPath: '/newactivity/'
     },
     devtool      : "#cheap-module-source-map",
@@ -49,7 +49,6 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
           include: paths.appSrc,
           loaders: ["vue"],
           query  : {
-            extends: paths.ownBabelrc,
             cacheDirectory: true
           }
         },
@@ -109,7 +108,7 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
     },
 
     plugins: [
-      new ExtractTextPlugin(`assets/css/${name}_[name].css`),
+      new ExtractTextPlugin(`assets/css/${name}/[name].css`),
       new webpack.HotModuleReplacementPlugin(),
       new HtmlWebpackPlugin({
         filename: `html/${name}.html`,
