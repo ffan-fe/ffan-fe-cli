@@ -1,16 +1,21 @@
-import run from './run';
+//import run from './run';
 
 
 
-export default  async function build({
-  sourceDirs = []
-}) {
+export default async function build(){
 
-  // 1. clean
-  // 2. copy
+  let { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 };
 
-  // 3. build
-
-
-
+  console.log(z)
+//  sourceDirs = []
+//}) {
+//
+//  // 1. clean
+//  // 2. copy
+//
+//  // 3. build
+//
+//
+//
+  await 1
 }

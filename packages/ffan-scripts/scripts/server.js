@@ -7,18 +7,16 @@ import paths from '../config/paths'
 import { getEntry } from './lib/validEntry';
 import getConfig from '../config/webpack.hot.config';
 
-async function watch(config) {
+const port = 8081;
+
+async function getWatchConfig(config) {
   const entries = await getEntry(config.name)
   return {...{watch: true, entry: entries}, ...getConfig(config)}
 }
 
-const port = 8081;
+async function server(options) {
 
-
-
-async function server(config1) {
-
-  let config = await watch(config1);
+  let config = await getWatchConfig(options);
 
   const sourceDir = config.dirName;
 
