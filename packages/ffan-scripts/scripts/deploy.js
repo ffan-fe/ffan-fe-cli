@@ -1,5 +1,9 @@
 import selectPage from './selectPage'
-import { execPromise,spawnPromise} from './lib/processPromise';
+import { execPromise,spawnPromise} from './lib/processPromise'
+import resetBuild from './resetBuild'
+
+// colors
+// const chalk = require('chalk');
 
 async function deploy() {
 
@@ -7,17 +11,13 @@ async function deploy() {
     console.log(`$ git status -s`.blue)
     const status = await spawnPromise('git status -s')
     console.log(status ? status.red : '---------------'.blue)
-    //var {page, isCDN} = await selectPage()
-    //if (!page.length) {
-    //  return console.log('You didn\'t choose any page!')
-    //}
-    //console.log(page)
-
+    //const selects = await selectPage()
+    await resetBuild()
   } catch (e) {
-    console.log('33333333333')
+    console.log('-- deploy error --')
     console.log(e)
   }
-  //run(commit.bind(null, page, isCDN))
+
 }
 
 export default deploy

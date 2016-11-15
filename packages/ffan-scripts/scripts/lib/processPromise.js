@@ -1,4 +1,4 @@
-import { exec, spawn } from  'child_process'
+import childProcess from  'child_process'
 
 /**
  * Use {stdio: 'pipe'} to exec a command.
@@ -8,7 +8,7 @@ import { exec, spawn } from  'child_process'
 export const execPromise = (command, options) => new Promise((resolve, reject) => {
   let out = ''
   let err = ''
-  const p = exec(command, {encoding: 'utf-8', ...options})
+  const p = childProcess.exec(command, {encoding: 'utf-8', ...options})
   p.stdout.on('data', data => out += data)
   p.stderr.on('data', data => err += data)
   p.on('error', reject)
@@ -33,7 +33,7 @@ export const spawnPromise = (commands, options) => new Promise((resolve, reject)
   const params = commands.slice(1)
   const command = commands[0]
 
-  spawn(command, params, {encoding: 'utf-8', stdio: 'inherit', ...options})
+  childProcess.spawn(command, params, {encoding: 'utf-8', stdio: 'inherit', ...options})
     .on('error', reject)
     .on('close', code => {
       if (code !== 0) {

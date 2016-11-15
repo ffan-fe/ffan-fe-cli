@@ -18,5 +18,6 @@ export default {
   appNodeModules: resolveApp('node_modules'),
   appDevBuild   : resolveApp('tmp'),
   appBuild      : resolveApp('build'),
+  appRoot       : resolveApp('root'),
   ownNodeModules: resolveOwn('../node_modules'),
 }

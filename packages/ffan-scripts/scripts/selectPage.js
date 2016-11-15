@@ -21,7 +21,13 @@ async function selectPage() {
         name     : 'page',
         message  : 'What\'s pages will you deploy? [CTRL-C to Exit]',
         paginated: true,
-        choices  : pages
+        choices  : pages,
+        validate: function (answer) {
+          if (answer.length <1) {
+            return 'You must choose at least one source directory.';
+          }
+          return true;
+        }
       },
         {
           type   : 'list',

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 require('babel-register')
+require('babel-polyfill')
 
 var run = require('../scripts/run').default
 
