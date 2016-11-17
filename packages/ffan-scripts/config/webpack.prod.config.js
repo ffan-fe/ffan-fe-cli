@@ -36,7 +36,7 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
 
     plugins: [
       new HtmlWebpackPlugin({
-        filename: `html/${name}.html`,
+        filename: `html/${name}/${name}.html`,
         ...html,
         isCDN   : isCDN === 'yes',
         template: html.template || `commons/tpl/${framework}Tpl.hbs`,

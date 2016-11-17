@@ -4,6 +4,7 @@ import resetBuild from './resetBuild'
 import paths from '../config/paths'
 import clean from './clean'
 import build from './build'
+import commit from './commit'
 import run from './run'
 
 // colors
@@ -16,7 +17,7 @@ async function deploy() {
     const status = await spawnPromise('git status -s')
     console.log(status ? status.red : '---------------'.blue)
     const selects = await selectPage()
-    //let repo = await resetBuild()
+    let repo = await run(resetBuild)
     await run(clean, {
       rootPath: paths.appBuild,
       sourceDirs: selects.pages,
@@ -24,10 +25,8 @@ async function deploy() {
     // TODO: copy library
 
     await run(build, selects)
-
-
-
-    // TODO : commit
+    await run(commit, {repo, pages: selects.pages})
+    await repo.push(remote.name, branch);
 
   } catch (e) {
     console.log('-- deploy error --')

@@ -20,4 +20,5 @@ export default {
   appBuild      : resolveApp('build'),
   appRoot       : resolveApp(''),
   ownNodeModules: resolveOwn('../node_modules'),
+  resolve       : path.resolve,
 }
