@@ -1,6 +1,6 @@
 import path from 'path';
 const globby = require('globby');
-import fs from 'fs';
+import fse from 'fs-extra';
 const pkg = require('../../package.json');
 
 const defaultSourceDir = pkg.dirs.sourceDir;
@@ -8,7 +8,7 @@ const defaultSourceDir = pkg.dirs.sourceDir;
 export async function getEntry(dirName) {
   const sourcePath = path.resolve(process.cwd(), 'src', dirName);
 
-  if (!fs.lstatSync(sourcePath).isDirectory()) {
+  if (!fse.lstatSync(sourcePath).isDirectory()) {
     return `'-- ${sourcePath} dir is empty! --`;
   }
 
@@ -23,14 +23,14 @@ export async function getEntry(dirName) {
   return {[dirName] : entriesFiles};
 }
 
-export async function getConfig(entry) {
+export async function getPageConfig(entry) {
 
   const defaultConfig = {
     name: entry,
   };
 
   try {
-    const config = fs.readJsonSync(path.resolve(defaultSourceDir, entry, 'config.json'));
+    const config = fse.readJsonSync(path.resolve(defaultSourceDir, entry, 'config.json'));
     config.html = config.html || {};
 
     if (!config.html.template) {
@@ -45,6 +45,8 @@ export async function getConfig(entry) {
     return Object.assign(defaultConfig, config);
 
   } catch (e) {
+    console.log('-- getPageConfig error --')
+    console.log(e)
     return defaultConfig;
   }
 }

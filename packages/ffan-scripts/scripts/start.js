@@ -2,7 +2,7 @@ import run from './run';
 //import clean from './clean';
 //import copy from './copy';
 import server from './server';
-import { getConfig } from './lib/validEntry';
+import { getPageConfig } from './lib/validEntry';
 
 
 export default async function start(_sourceDir) {
@@ -14,7 +14,7 @@ export default async function start(_sourceDir) {
       return
     }
 
-    const config = await getConfig(sourceDir);
+    const config = await getPageConfig(sourceDir);
 
     // await run(clean.bind(undefined, sourceDir));
     // await run(copy.bind(undefined, 'tmp'));

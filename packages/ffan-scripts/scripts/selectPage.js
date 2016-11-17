@@ -18,7 +18,7 @@ async function selectPage() {
     inquirer.prompt(
       [{
         type     : 'checkbox',
-        name     : 'page',
+        name     : 'pages',
         message  : 'What\'s pages will you deploy? [CTRL-C to Exit]',
         paginated: true,
         choices  : pages,

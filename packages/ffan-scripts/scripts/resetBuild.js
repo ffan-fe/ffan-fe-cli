@@ -28,6 +28,7 @@ export default async function resetBuild() {
     throw new Error('-- Can not find remotes["origin"] in  package.json')
   }
 
+
   fse.ensureDirSync(paths.appBuild)
   const repo = await GitRepo.open(paths.appBuild, {init: true})
   repo.setRemote(originRemote.name, originRemote.url)
@@ -45,4 +46,5 @@ export default async function resetBuild() {
     await execPromise(`git reset --hard origin/master`, buildCwd)
     await execPromise(`git checkout -B ${branch}`, buildCwd)
   }
+  return await repo;
 }

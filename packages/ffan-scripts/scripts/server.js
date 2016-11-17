@@ -1,13 +1,13 @@
-import webpack from 'webpack';
-import WebpackDevServer from 'webpack-dev-server';
-import getip from './lib/ip.js';
-//import {resolve} from 'path';
-var colors = require('colors');
+import webpack from 'webpack'
+import WebpackDevServer from 'webpack-dev-server'
+import getip from './lib/ip.js'
+//import {resolve} from 'path'
+var colors = require('colors')
 import paths from '../config/paths'
-import { getEntry } from './lib/validEntry';
-import getConfig from '../config/webpack.hot.config';
+import { getEntry } from './lib/validEntry'
+import getConfig from '../config/webpack.hot.config'
 
-const port = 8081;
+const port = 8081
 
 async function getWatchConfig(config) {
   const entries = await getEntry(config.name)
@@ -15,25 +15,24 @@ async function getWatchConfig(config) {
 }
 
 async function server(options) {
+  let config = await getWatchConfig(options)
 
-  let config = await getWatchConfig(options);
+  const sourceDir = config.dirName
 
-  const sourceDir = config.dirName;
-
-  console.log(config.entry)
+  //console.log(config.entry)
 
   for (var key in config.entry) {
     config.entry[key].unshift(
       require.resolve("webpack-dev-server/client") + `?http://0.0.0.0:${port}/`,
-      require.resolve("webpack/hot/dev-server"));
+      require.resolve("webpack/hot/dev-server"))
   }
 
   //console.log(config.entry)
 
-  let compiler = webpack(config);
+  let compiler = webpack(config)
   compiler.run(function (err, stats) {
     if (err) {
-      return console.log(err);
+      return console.log(err)
     }
 
     console.log(stats.toString({
@@ -54,8 +53,8 @@ async function server(options) {
       //errorDetails: false,
       //warnings: false,
       //publicPath: false
-    }));
-  });
+    }))
+  })
   var server = new WebpackDevServer(compiler, {
     contentBase   : paths.appDevBuild,
     clientLogLevel: 'none',
@@ -71,19 +70,19 @@ async function server(options) {
       '/newactivity/*': {
         target     : 'http://127.0.0.1:' + port + '/',
         pathRewrite: function (path, req) {
-          path = path.replace('/newactivity/assets/', '/assets/');
-          return path.replace('/newactivity/', '/html/');
+          path = path.replace('/newactivity/assets/', '/assets/')
+          return path.replace('/newactivity/', '/html/')
         }
       }
     }
   }).listen(port, '0.0.0.0', function (err) {
-    if (err) console.log(err);
+    if (err) console.log(err)
 
-    let myIp = getip();
-    console.log("\n-------------\n");
-    console.log(`http://${myIp}:${port}/newactivity/${sourceDir}.html`);
-  });
+    let myIp = getip()
+    console.log("\n-------------\n")
+    console.log(`http://${myIp}:${port}/newactivity/${sourceDir}.html`)
+  })
 }
 
 
-export default server;
+export default server
