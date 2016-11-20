@@ -3,30 +3,39 @@ import paths from '../config/paths'
 import GitRepo from 'git-repository'
 import { execPromise } from './lib/processPromise'
 import { resolve } from 'path'
-
+import {getPack} from './lib/package'
 
 async function getCurrentBranch(cwd) {
   let branch = await execPromise('git symbolic-ref HEAD 2> /dev/null', cwd)
   return branch.trim().split('/').slice(-1)[0]
 }
 
-
 const currentCwd = {cwd: paths.appRoot}
 const buildCwd = {cwd: paths.appBuild}
 
 export default async function resetBuild() {
 
+  const remotes = getPack('remotes')
+
   let originRemote = {}
-  try {
-    originRemote = fse.readJsonSync(resolve(paths.appRoot, 'package.json'))['remotes']
-      .filter(value => value.name === 'origin')[0]
-  } catch (e) {
-    throw new Error('-- Can not find remotes["origin"] in  package.json')
+  if (remotes && remotes.length) {
+    originRemote = remotes.find(v => v.name === 'origin' )
   }
 
-  if (!originRemote.name) {
-    throw new Error('-- Can not find remotes["origin"] in  package.json')
+  if (originRemote.name) {
+    return
   }
+
+  //try {
+  //  originRemote = fse.readJsonSync(resolve(paths.appRoot, 'package.json'))['remotes']
+  //    .filter(value => value.name === 'origin')[0]
+  //} catch (e) {
+  //  throw new Error('-- Can not find remotes["origin"] in  package.json')
+  //}
+  //
+  //if (!originRemote.name) {
+  //  throw new Error('-- Can not find remotes["origin"] in  package.json')
+  //}
 
 
   fse.ensureDirSync(paths.appBuild)
