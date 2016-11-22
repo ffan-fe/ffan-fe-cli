@@ -11,18 +11,39 @@ const port = 8081
 
 async function getWatchConfig(config) {
   const entries = await getEntry(config.name)
-  return {...{watch: true, entry: entries}, ...getConfig(config)}
+  return {...{entry: entries}, ...getConfig(config)}
+}
+
+function getWebpack(config) {
+  return webpack({...config}, function (err, stats) {
+    if (err) {
+      return console.log(err)
+    }
+    console.log(stats.toString({
+      colors      : true,
+      children    : false,
+      // https://github.com/webpack/webpack/issues/1191#issuecomment-180922894
+      hash        : false,
+      version     : false,
+      timings     : false,
+      assets      : false,
+      chunks      : false,
+      modules     : false,
+      reasons     : false,
+      source      : false,
+      errors      : false,
+      errorDetails: false,
+      warnings    : false,
+      publicPath  : false
+    }))
+
+  })
 }
 
 async function server(options) {
   let config = await getWatchConfig(options)
 
-  //console.log('-------------------')
-  //console.log(config)
-
   const sourceDir = config.dirName
-
-  //console.log(config.entry)
 
   for (var key in config.entry) {
     config.entry[key].unshift(
@@ -30,36 +51,7 @@ async function server(options) {
       require.resolve("webpack/hot/dev-server"))
   }
 
-
-  let compiler = webpack(config)
-  compiler.run(function (err, stats) {
-    if (err) {
-      return console.log(err)
-    }
-    console.log(33333333333)
-    //console.log(stats)
-    console.log(stats.toString({
-      colors  : true,
-      //children: false,
-
-      // https://github.com/webpack/webpack/issues/1191#issuecomment-180922894
-
-      //hash: false,
-      //version: false,
-      //timings: false,
-      //assets: false,
-      //chunks: false,
-
-      //modules: false,
-      //reasons: false,
-      //source: false,
-      //errors: false,
-      //errorDetails: false,
-      //warnings: false,
-      //publicPath: false
-    }))
-  })
-  var server = new WebpackDevServer(compiler, {
+  var server = new WebpackDevServer(getWebpack(config), {
     contentBase   : paths.appDevBuild,
     clientLogLevel: 'none',
     quiet         : true,

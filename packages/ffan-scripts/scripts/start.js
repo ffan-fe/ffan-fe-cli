@@ -17,7 +17,7 @@ export default async function start(_sourceDir) {
     const config = await getPageConfig(sourceDir)
 
     // await run(clean.bind(undefined, sourceDir))
-    // await run(copy, {target: paths.appDevBuild})
+     await run(copy, {target: paths.appDevBuild})
      //const serverConfig = await run(watch, config)
     await run(server, config)
 
