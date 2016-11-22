@@ -1,11 +1,9 @@
 
 
-
 async function commit({repo, pages}) {
-  console.log(repo)
-  repo.add('--all .')
+  await repo.add('--all .')
   await repo.commit(JSON.stringify(pages.toString()))
-
+  await repo.push(repo._name, repo._branch)
 }
 
 export default commit

@@ -6,6 +6,7 @@ import * as config from './webpack.common.config'
 
 export default function getConfig({name, html = {}, px2rem = {}, framework = 'jquery', isCDN = 'no'}) {
 
+  console.log(html)
   // px2rem
   const px2remConfig = {
     remUnit     : 75,
@@ -38,7 +39,7 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
         filename: `html/${name}.html`,
         ...html,
         isCDN   : isCDN === 'yes',
-        template: html.template || `commons/tpl/${framework}Tpl.hbs`,
+        template: html.template || paths.resolve(paths.appHtmlTemplates, `${framework}Tpl.hbs`),
       }),
       new ExtractTextPlugin(`assets/css/${name}/[name].css`),
       new webpack.HotModuleReplacementPlugin(),

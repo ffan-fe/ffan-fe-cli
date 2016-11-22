@@ -1,7 +1,6 @@
 import path from 'path'
 import fs from 'fs'
 
-
 // 防止软连接失效
 var appDirectory = fs.realpathSync(process.cwd())
 
@@ -14,11 +13,13 @@ function resolveOwn(relativePath) {
 }
 
 export default {
-  appSrc        : resolveApp('src'),
-  appNodeModules: resolveApp('node_modules'),
-  appDevBuild   : resolveApp('tmp'),
-  appBuild      : resolveApp('build'),
-  appRoot       : resolveApp(''),
-  ownNodeModules: resolveOwn('../node_modules'),
-  resolve       : path.resolve,
+  appSrc          : resolveApp('src'),
+  appNodeModules  : resolveApp('node_modules'),
+  appCommons      : resolveApp('commons'),
+  appHtmlTemplates: resolveApp('commons/htmlTemplates'),
+  appDevBuild     : resolveApp('tmp'),
+  appBuild        : resolveApp('build'),
+  appRoot         : resolveApp(''),
+  ownNodeModules  : resolveOwn('../node_modules'),
+  resolve         : path.resolve,
 }

@@ -17,6 +17,9 @@ async function getWatchConfig(config) {
 async function server(options) {
   let config = await getWatchConfig(options)
 
+  //console.log('-------------------')
+  //console.log(config)
+
   const sourceDir = config.dirName
 
   //console.log(config.entry)
@@ -27,25 +30,26 @@ async function server(options) {
       require.resolve("webpack/hot/dev-server"))
   }
 
-  //console.log(config.entry)
 
   let compiler = webpack(config)
   compiler.run(function (err, stats) {
     if (err) {
       return console.log(err)
     }
-
+    console.log(33333333333)
+    //console.log(stats)
     console.log(stats.toString({
       colors  : true,
-      children: false,
+      //children: false,
 
       // https://github.com/webpack/webpack/issues/1191#issuecomment-180922894
 
-      hash: false,
-      version: false,
-      timings: false,
-      assets: false,
-      chunks: false,
+      //hash: false,
+      //version: false,
+      //timings: false,
+      //assets: false,
+      //chunks: false,
+
       //modules: false,
       //reasons: false,
       //source: false,

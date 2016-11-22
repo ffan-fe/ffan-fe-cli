@@ -3,7 +3,9 @@ import paths from '../config/paths'
 import GitRepo from 'git-repository'
 import { execPromise } from './lib/processPromise'
 import { resolve } from 'path'
-import {getPack} from './lib/package'
+import { getPack } from './lib/package'
+
+const remoteName = 'origin'
 
 async function getCurrentBranch(cwd) {
   let branch = await execPromise('git symbolic-ref HEAD 2> /dev/null', cwd)
@@ -13,37 +15,29 @@ async function getCurrentBranch(cwd) {
 const currentCwd = {cwd: paths.appRoot}
 const buildCwd = {cwd: paths.appBuild}
 
-export default async function resetBuild() {
+async function resetBuild() {
+
 
   const remotes = getPack('remotes')
 
-  let originRemote = {}
+  let remoteOrigin = {}
   if (remotes && remotes.length) {
-    originRemote = remotes.find(v => v.name === 'origin' )
+    remoteOrigin = remotes.find(v => v.name === remoteName)
   }
 
-  if (originRemote.name) {
-    return
+  if (!remoteOrigin.name) {
+    throw new Error('remoteOrigin is not found')
   }
-
-  //try {
-  //  originRemote = fse.readJsonSync(resolve(paths.appRoot, 'package.json'))['remotes']
-  //    .filter(value => value.name === 'origin')[0]
-  //} catch (e) {
-  //  throw new Error('-- Can not find remotes["origin"] in  package.json')
-  //}
-  //
-  //if (!originRemote.name) {
-  //  throw new Error('-- Can not find remotes["origin"] in  package.json')
-  //}
-
 
   fse.ensureDirSync(paths.appBuild)
   const repo = await GitRepo.open(paths.appBuild, {init: true})
-  repo.setRemote(originRemote.name, originRemote.url)
+  repo.setRemote(remoteOrigin.name, remoteOrigin.url)
   let branch = await getCurrentBranch(currentCwd)
+  repo._branch = branch
+  repo._name = remoteName
   await execPromise('git clean -f', buildCwd)
-  const isRefExists = await repo.hasRef(originRemote.url, branch)
+
+  const isRefExists = await repo.hasRef(remoteOrigin.url, branch)
   if (isRefExists) {
     await execPromise(`git fetch -f origin ${branch}`, buildCwd)
     await execPromise(`git checkout -f ${branch}`, buildCwd)
@@ -56,4 +50,7 @@ export default async function resetBuild() {
     await execPromise(`git checkout -B ${branch}`, buildCwd)
   }
   return await repo;
+
 }
+
+export default resetBuild;
