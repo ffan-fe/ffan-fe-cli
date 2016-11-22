@@ -9,7 +9,7 @@ export function getPages() {
 async function selectPage() {
 
   let pages = getPages();
-  pages.reverse().push('---------------------')
+  pages.reverse().push(new inquirer.Separator())
   pages = pages.filter(function (v) {
     return v !== '_commons'
   })

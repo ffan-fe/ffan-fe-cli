@@ -20,10 +20,10 @@ export function getLoaders(px2remConfig, includePath, name) {
     {
       test   : /\.(vue)$/,
       include: includePath,
-      loaders: ["vue"],
+      loader : "vue",
       query  : {
-        presets       : [require('./babel-presets-ffan')],
-        cacheDirectory: true
+        presets       : [require('./babel-presets-ffan-vue')],
+        cacheDirectory: true,
       }
     },
     {
@@ -39,7 +39,7 @@ export function getLoaders(px2remConfig, includePath, name) {
       test  : /\.(png|jpg|gif|jpeg)$/,
       loader: "url",
       query : {
-        name : `assets/img/${name}_[hash:8].[ext]`,
+        name : `assets/img/${name}/${name}_[hash:8].[ext]`,
         limit: 8192
       }
     },
@@ -60,11 +60,11 @@ export function getLoaders(px2remConfig, includePath, name) {
     },
     {
       test  : /\.less$/,
-      loader: ExtractTextPlugin.extract(["css", "px2remless?" + JSON.stringify(px2remConfig), "postcss", "less"])
+      loader: ExtractTextPlugin.extract("style", ["css", "px2remless?" + JSON.stringify(px2remConfig), "postcss", "less"])
     },
     {
       test  : /\.css$/,
-      loader: ExtractTextPlugin.extract(["css", "px2remless?" + JSON.stringify(px2remConfig), "postcss"])
+      loader: ExtractTextPlugin.extract("style", ["css", "px2remless?" + JSON.stringify(px2remConfig), "postcss"])
     }
   ]
 
@@ -75,8 +75,8 @@ export function getModule(px2remConfig) {
   return {
     vue: {
       loaders: {
-        css : ExtractTextPlugin.extract(["css", "px2remless?" + JSON.stringify(px2remConfig), "postcss"]),
-        less: ExtractTextPlugin.extract(["css", "px2remless?" + JSON.stringify(px2remConfig), "postcss", "less"])
+        css : ExtractTextPlugin.extract("vue-style", ["css", "px2remless?" + JSON.stringify(px2remConfig), "postcss"]),
+        less: ExtractTextPlugin.extract("vue-style", ["css", "px2remless?" + JSON.stringify(px2remConfig), "postcss", "less"])
       }
     },
 

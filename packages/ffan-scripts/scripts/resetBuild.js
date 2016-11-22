@@ -3,7 +3,7 @@ import paths from '../config/paths'
 import GitRepo from 'git-repository'
 import { execPromise } from './lib/processPromise'
 import { resolve } from 'path'
-import { getPack } from './lib/package'
+import { getPack } from '../config/package'
 
 const remoteName = 'origin'
 
@@ -45,9 +45,17 @@ async function resetBuild() {
   } else {
     // TODO : 测试阶段暂时从 master 分支迁出
     // 一定要保证远端build master 分支有代码，否则报错
-    await execPromise(`git fetch -f origin master`, buildCwd)
-    await execPromise(`git reset --hard origin/master`, buildCwd)
-    await execPromise(`git checkout -B ${branch}`, buildCwd)
+    try {
+      await execPromise(`git fetch -f origin master`, buildCwd)
+      await execPromise(`git reset --hard origin/master`, buildCwd)
+    } catch (e) {
+    }
+
+    try {
+      await execPromise(`git checkout -b ${branch}`, buildCwd)
+    } catch (e) {
+      await execPromise(`git checkout ${branch}`, buildCwd)
+    }
   }
   return await repo;
 

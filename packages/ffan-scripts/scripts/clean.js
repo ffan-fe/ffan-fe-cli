@@ -25,6 +25,7 @@ async function clean({
       `${rootPath}/assets/css/${dir}`,
       `${rootPath}/assets/js/${dir}`,
       `${rootPath}/assets/img/${dir}`,
+      `${rootPath}/html/${dir}`,
     ])
   }))
 

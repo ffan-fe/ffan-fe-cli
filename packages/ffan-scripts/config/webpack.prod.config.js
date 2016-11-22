@@ -3,8 +3,12 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import webpack from 'webpack'
 import paths from './paths'
 import * as config from './webpack.common.config'
+import { getPack } from './package'
 
 export default function getConfig({name, html = {}, px2rem = {}, framework = 'jquery', isCDN = 'no'}) {
+
+  const pack = getPack()
+  const localPublicPath = paths.resolve('/fe', pack['namespace'], pack['name'])
 
   // px2rem
   const px2remConfig = {
@@ -25,18 +29,18 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
     output   : {
       path      : paths.appBuild,
       filename  : `assets/js/${name}/[name]_[hash:4].js`,
-      publicPath: (isCDN === 'yes') ? 'https://nres.ffan.com/newactivity/' : '/newactivity/',
+      publicPath: (isCDN === 'yes') ? 'https://nres.ffan.com/newactivity/' : localPublicPath,
     },
     externals: config.externals,
     module   : {
       noParse: config.noParse,
-      loaders: config.getLoaders(px2remConfig, paths.appSrc),
+      loaders: config.getLoaders(px2remConfig, paths.appSrc, name),
       ...config.getModule(px2remConfig)
     },
 
     plugins: [
       new HtmlWebpackPlugin({
-        filename: `html/${name}/${name}.html`,
+        filename: `html/${name}.html`,
         ...html,
         isCDN   : isCDN === 'yes',
         template: html.template || paths.resolve(paths.appHtmlTemplates, `${framework}Tpl.hbs`),

@@ -4,6 +4,7 @@ import webpack from 'webpack'
 import paths from './paths'
 import * as config from './webpack.common.config'
 
+
 export default function getConfig({name, html = {}, px2rem = {}, framework = 'jquery', isCDN = 'no'}) {
 
   // px2rem
@@ -18,14 +19,18 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
       dirName      : name,
       devtool      : "#cheap-module-source-map",
       resolveLoader: {
-        root           : paths.ownNodeModules,
-        moduleTemplates: ['*-loader']
+        modulesDirectories: [paths.ownNodeModules],
       },
+      //resolveLoader: {
+      //  root           : paths.ownNodeModules,
+      //moduleTemplates: ['*-loader']
+      //},
     },
     output   : {
       path      : paths.appDevBuild,
       filename  : `./assets/js/${name}/[name].js`,
-      publicPath: '/'
+      publicPath: '/',
+      //publicPath: paths.resolve('/fe', pack['namespace'], pack['name']),
       //publicPath: (isCDN === 'yes') ? 'https://nres.ffan.com/newactivity/' : '/newactivity/',
     },
     externals: config.externals,
@@ -45,107 +50,5 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
       new webpack.HotModuleReplacementPlugin(),
     ]
   }
-
-
-  //return {
-  //  dirName      : name,
-  //  externals    : {
-  //    jquery     : 'jQuery',
-  //    react      : 'React',
-  //    'react-dom': 'ReactDOM',
-  //    vue        : 'Vue',
-  //  },
-  //  output       : {
-  //    path      : paths.appDevBuild,
-  //    //path: "adsaf",
-  //    filename  : `assets/js/${name}/[name].js`,
-  //    publicPath: '/newactivity/'
-  //  },
-  //  devtool      : "#cheap-module-source-map",
-  //  resolveLoader: {
-  //    root           : paths.ownNodeModules,
-  //    moduleTemplates: ['*-loader']
-  //  },
-  //  module       : {
-  //    noParse: [
-  //      'jquery',
-  //      'react',
-  //      'react-dom',
-  //      'vue',
-  //    ],
-  //    loaders: [
-  //      {
-  //        test   : /\.(vue)$/,
-  //        include: paths.appSrc,
-  //        loaders: ["vue"],
-  //        query  : {
-  //          presets       : [require('./babel-presets-ffan')],
-  //          cacheDirectory: true
-  //        }
-  //      },
-  //      {
-  //        test   : /\.(js|jsx)$/,
-  //        include: paths.appSrc,
-  //        loader : "babel",
-  //        query  : {
-  //          presets       : [require('./babel-presets-ffan')],
-  //          cacheDirectory: true,
-  //        }
-  //      },
-  //      {
-  //        test  : /\.(png|jpg|gif|jpeg)$/,
-  //        loader: "url",
-  //        query : {
-  //          name : `assets/img/${name}_[hash:8].[ext]`,
-  //          limit: 8192
-  //        }
-  //      },
-  //      {
-  //        test  : /\.(handlebars|hbs)$/,
-  //        loader: "handlebars",
-  //        query : {
-  //          inlineRequires: '\/images\/'
-  //        }
-  //      },
-  //      {
-  //        test  : /\.(html)$/,
-  //        loader: "html"
-  //      },
-  //      {
-  //        test  : /\.(ttf|eot|svg)$/,
-  //        loader: "url?limit=100000"
-  //      },
-  //      {
-  //        test  : /\.less$/,
-  //        loader: ExtractTextPlugin.extract(["css", "px2remless?" + JSON.stringify(px2remConfig), "postcss", "less"])
-  //      },
-  //      {
-  //        test  : /\.css$/,
-  //        loader: ExtractTextPlugin.extract(["css", "px2remless?" + JSON.stringify(px2remConfig), "postcss"])
-  //      }
-  //    ]
-  //  },
-  //
-  //  vue: {
-  //    loaders: {
-  //      css : ExtractTextPlugin.extract(["css", "px2remless?" + JSON.stringify(px2remConfig), "postcss"]),
-  //      less: ExtractTextPlugin.extract(["css", "px2remless?" + JSON.stringify(px2remConfig), "postcss", "less"])
-  //    }
-  //  },
-  //
-  //  postcss: function () {
-  //    return [autoprefixer];
-  //  },
-  //
-  //  plugins: [
-  //    new ExtractTextPlugin(`assets/css/${name}/[name].css`),
-  //    new webpack.HotModuleReplacementPlugin(),
-  //    new HtmlWebpackPlugin({
-  //      filename: `html/${name}.html`,
-  //      ...htmlConfig,
-  //    })
-  //  ]
-  //}
-
 
 };

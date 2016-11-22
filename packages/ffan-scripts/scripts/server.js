@@ -81,7 +81,7 @@ async function server(options) {
 
     let myIp = getip()
     console.log("\n-------------\n")
-    console.log(`http://${myIp}:${port}/newactivity/${sourceDir}.html`)
+    console.log(`http://${myIp}:${port}/html/${sourceDir}.html`)
   })
 }
 

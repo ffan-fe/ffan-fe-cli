@@ -1,5 +1,5 @@
 import fse from 'fs-extra'
-import paths from '../../config/paths'
+import paths from './paths'
 
 export function getPack(item) {
   try {
