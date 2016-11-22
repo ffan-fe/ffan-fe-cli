@@ -1,6 +1,6 @@
 {
   "name": "ffan-scripts",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "ffan-scripts",
   "bin": "bin/ffan-scripts.js",
   "scripts": {
@@ -13,7 +13,7 @@
   },
   "author": "leiming",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "autoprefixer": "^6.4.1",
     "babel-cli": "^6.18.0",
     "babel-plugin-transform-runtime": "^6.15.0",
@@ -58,9 +58,7 @@
     "vue-router": "^0.7.13",
     "vue-style-loader": "^1.0.0",
     "webpack": "^1.13.3",
-    "webpack-dev-server": "^1.16.2"
-  },
-  "dependencies": {
+    "webpack-dev-server": "^1.16.2",
     "babel-polyfill": "^6.9.1"
   }
 }
