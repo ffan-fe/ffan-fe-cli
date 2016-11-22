@@ -20,18 +20,14 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
       devtool      : "#cheap-module-source-map",
       resolveLoader: {
         modulesDirectories: [paths.ownNodeModules],
+        moduleTemplates   : ['*-loader', '*']
       },
-      //resolveLoader: {
-      //  root           : paths.ownNodeModules,
-      //moduleTemplates: ['*-loader']
-      //},
     },
     output   : {
       path      : paths.appDevBuild,
       filename  : `./assets/js/${name}/[name].js`,
       publicPath: '/',
       //publicPath: paths.resolve('/fe', pack['namespace'], pack['name']),
-      //publicPath: (isCDN === 'yes') ? 'https://nres.ffan.com/newactivity/' : '/newactivity/',
     },
     externals: config.externals,
     module   : {
@@ -39,6 +35,7 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
       loaders: config.getLoaders(px2remConfig, paths.appSrc, name),
       ...config.getModule(px2remConfig)
     },
+    vue      : config.vueConfig,
     plugins  : [
       new HtmlWebpackPlugin({
         filename: `html/${name}.html`,

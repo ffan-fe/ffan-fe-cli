@@ -37,8 +37,8 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
       loaders: config.getLoaders(px2remConfig, paths.appSrc, name),
       ...config.getModule(px2remConfig)
     },
-
-    plugins: [
+    vue      : config.vueConfig,
+    plugins  : [
       new HtmlWebpackPlugin({
         filename: `html/${name}.html`,
         ...html,

@@ -22,7 +22,7 @@ export function getLoaders(px2remConfig, includePath, name) {
       include: includePath,
       loader : "vue",
       query  : {
-        presets       : [require('./babel-presets-ffan-vue')],
+        presets       : [require('./babel-presets-ffan')],
         cacheDirectory: true,
       }
     },
@@ -85,4 +85,11 @@ export function getModule(px2remConfig) {
     },
   }
 
+}
+
+export const vueConfig = {
+  // FIX : Cannot find es2015
+  loaders: {
+    js: `babel?presets[]=${require.resolve('babel-preset-latest')}&plugins[]=${require.resolve('babel-plugin-transform-runtime')}&comments=false'`
+  }
 }
