@@ -15,7 +15,7 @@ export const noParse = [
   'vue',
 ]
 
-export function getLoaders(px2remConfig, includePath) {
+export function getLoaders(px2remConfig, includePath, name) {
   return [
     {
       test   : /\.(vue)$/,
@@ -39,7 +39,7 @@ export function getLoaders(px2remConfig, includePath) {
       test  : /\.(png|jpg|gif|jpeg)$/,
       loader: "url",
       query : {
-        name : `assets/img/[name]/[hash:8].[ext]`,
+        name : `assets/img/${name}_[hash:8].[ext]`,
         limit: 8192
       }
     },

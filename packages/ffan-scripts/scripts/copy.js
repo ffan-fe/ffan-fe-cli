@@ -37,6 +37,8 @@ const getLibs = dist => {
       src   : `node_modules/${lib}/dist/`,
       target: `${dist}/assets/js/libs/${lib}/`,
     }))
+
+
 }
 
 

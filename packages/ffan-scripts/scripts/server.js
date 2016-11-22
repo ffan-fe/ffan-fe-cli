@@ -15,7 +15,7 @@ async function getWatchConfig(config) {
 }
 
 function getWebpack(config) {
-  return webpack({...config}, function (err, stats) {
+  return webpack(config, function (err, stats) {
     if (err) {
       return console.log(err)
     }
@@ -51,6 +51,10 @@ async function server(options) {
       require.resolve("webpack/hot/dev-server"))
   }
 
+  //console.log(config.entry)
+
+  await webpack(getWebpack(config))
+
   var server = new WebpackDevServer(getWebpack(config), {
     contentBase   : paths.appDevBuild,
     clientLogLevel: 'none',
@@ -63,6 +67,7 @@ async function server(options) {
         changeOrigin: true,
         secure      : false
       },
+      // TODO : 暂时没啥用
       '/newactivity/*': {
         target     : 'http://127.0.0.1:' + port + '/',
         pathRewrite: function (path, req) {

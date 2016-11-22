@@ -6,7 +6,6 @@ import * as config from './webpack.common.config'
 
 export default function getConfig({name, html = {}, px2rem = {}, framework = 'jquery', isCDN = 'no'}) {
 
-  console.log(paths.appDevBuild)
   // px2rem
   const px2remConfig = {
     remUnit     : 75,
@@ -26,12 +25,13 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
     output   : {
       path      : paths.appDevBuild,
       filename  : `./assets/js/${name}/[name].js`,
+      publicPath: '/'
       //publicPath: (isCDN === 'yes') ? 'https://nres.ffan.com/newactivity/' : '/newactivity/',
     },
     externals: config.externals,
     module   : {
       noParse: config.noParse,
-      loaders: config.getLoaders(px2remConfig, paths.appSrc),
+      loaders: config.getLoaders(px2remConfig, paths.appSrc, name),
       ...config.getModule(px2remConfig)
     },
     plugins  : [
