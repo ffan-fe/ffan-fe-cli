@@ -12,6 +12,10 @@ function resolveOwn(relativePath) {
   return path.resolve(__dirname, relativePath)
 }
 
+//if (__dirname.indexOf(path.join('packages', ''))) {
+//
+//}
+
 export default {
   appSrc          : resolveApp('src'),
   appNodeModules  : resolveApp('node_modules'),

@@ -19,7 +19,7 @@ async function selectPage() {
       [{
         type     : 'checkbox',
         name     : 'pages',
-        message  : 'What\'s pages will you deploy? [CTRL-C to Exit]',
+        message  : 'What\'s pages will you choose? [CTRL-C to Exit]',
         paginated: true,
         choices  : pages,
         validate: function (answer) {

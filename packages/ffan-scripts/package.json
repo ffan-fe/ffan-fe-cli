@@ -4,6 +4,7 @@
   "description": "ffan-scripts",
   "bin": "bin/ffan-scripts.js",
   "scripts": {
+    "start": "node bin/ffan-scripts.js start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dirs": {
