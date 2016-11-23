@@ -31,6 +31,7 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
       filename  : `assets/js/${name}/[name]_[hash:4].js`,
       publicPath: (isCDN === 'yes') ? 'https://nres.ffan.com/newactivity/' : localPublicPath,
     },
+    resolve  : config.resolve,
     externals: config.externals,
     module   : {
       noParse: config.noParse,

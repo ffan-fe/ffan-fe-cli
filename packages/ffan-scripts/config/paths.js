@@ -12,18 +12,33 @@ function resolveOwn(relativePath) {
   return path.resolve(__dirname, relativePath)
 }
 
-//if (__dirname.indexOf(path.join('packages', ''))) {
-//
-//}
+export const isInFfanScripts = process.cwd().indexOf(path.join('ffan-fe-cli', 'packages', 'ffan-scripts')) !== -1
 
-export default {
-  appSrc          : resolveApp('src'),
-  appNodeModules  : resolveApp('node_modules'),
-  appCommons      : resolveApp('commons'),
-  appHtmlTemplates: resolveApp('commons/htmlTemplates'),
-  appDevBuild     : resolveApp('tmp'),
-  appBuild        : resolveApp('build'),
-  appRoot         : resolveApp(''),
-  ownNodeModules  : resolveOwn('../node_modules'),
-  resolve         : path.resolve,
+if (isInFfanScripts) {
+  module.exports = {
+    appSrc          : resolveApp('commons/boilerplate'),
+    appNodeModules  : resolveApp('node_modules'),
+    appCommons      : resolveApp('commons'),
+    appHtmlTemplates: resolveApp('commons/htmlTemplates'),
+    appDevBuild     : resolveApp('tmp'),
+    appBuild        : resolveApp('build'),
+    appRoot         : resolveApp(''),
+    ownNodeModules  : resolveOwn('../node_modules'),
+    resolve         : path.resolve,
+    isInFfanScripts : isInFfanScripts,
+  }
+} else {
+  module.exports = {
+    appSrc          : resolveApp('src'),
+    appNodeModules  : resolveApp('node_modules'),
+    appCommons      : resolveApp('commons'),
+    appHtmlTemplates: resolveApp('commons/htmlTemplates'),
+    appDevBuild     : resolveApp('tmp'),
+    appBuild        : resolveApp('build'),
+    appRoot         : resolveApp(''),
+    ownNodeModules  : resolveOwn('../node_modules'),
+    resolve         : path.resolve,
+    isInFfanScripts : isInFfanScripts,
+  }
 }
+

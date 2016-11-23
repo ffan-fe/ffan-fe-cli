@@ -8,8 +8,6 @@ import commit from './commit'
 import run from './run'
 import copy from './copy'
 
-// colors
-// const chalk = require('chalk');
 
 async function deploy() {
   try {

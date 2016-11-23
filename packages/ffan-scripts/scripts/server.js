@@ -51,8 +51,6 @@ async function server(options) {
       require.resolve("webpack/hot/dev-server"))
   }
 
-  //console.log(config.entry)
-
   await webpack(getWebpack(config))
 
   var server = new WebpackDevServer(getWebpack(config), {

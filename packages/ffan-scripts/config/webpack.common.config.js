@@ -1,5 +1,7 @@
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import autoprefixer from 'autoprefixer'
+import  paths from './paths'
+
 
 export const externals = {
   jquery     : 'jQuery',
@@ -14,6 +16,14 @@ export const noParse = [
   'react-dom',
   'vue',
 ]
+
+export const resolve = {
+  extensions: ['', '.html', '.js', '.json', '.less', '.css'],
+  alias     : {
+    "normalize.css": paths.resolve(paths.appCommons, 'libs', 'normalize.css'),
+    "base.less"    : paths.resolve(paths.appCommons, 'css', 'base.less'),
+  }
+}
 
 export function getLoaders(px2remConfig, includePath, name) {
   return [

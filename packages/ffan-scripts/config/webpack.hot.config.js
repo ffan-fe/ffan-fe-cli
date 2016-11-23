@@ -29,6 +29,7 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
       publicPath: '/',
       //publicPath: paths.resolve('/fe', pack['namespace'], pack['name']),
     },
+    resolve  : config.resolve,
     externals: config.externals,
     module   : {
       noParse: config.noParse,

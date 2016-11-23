@@ -19,11 +19,10 @@ export default async function start(argv) {
       return console.error('-- pageName is empty! --')
     }
 
-    //console.log(__dirname)
-    //if (!fse.existsSync(pageName)) {
-    //  return console.log(`-- ${pageName} is not exist! --`.cyan)
-    //}
-    // clean
+    const pageDir = paths.resolve(paths.appSrc, pageName)
+    if (!fse.existsSync(pageDir)) {
+      return console.log(`-- ${pageDir} is not exist! --`.cyan)
+    }
 
     const config = await getPageConfig(pageName)
     await run(copy, {target: paths.appDevBuild})

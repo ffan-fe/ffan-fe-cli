@@ -1,17 +1,19 @@
 {
   "name": "ffan-scripts",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "ffan-scripts",
   "bin": "bin/ffan-scripts.js",
   "scripts": {
     "start": "node bin/ffan-scripts.js start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dirs": {
-    "sourceDir": "src",
-    "buildDir": "build",
-    "tempDir": "tmp"
-  },
+  "files": [
+    ".babelrc",
+    "commons",
+    "bin",
+    "config",
+    "scripts"
+  ],
   "author": "leiming",
   "license": "MIT",
   "dependencies": {

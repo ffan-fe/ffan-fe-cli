@@ -11,6 +11,6 @@ ncp-debug.log
 npm-debug.log
 .idea/
 .DS_Store
-
+**/tmp
 
 packages/abc/
