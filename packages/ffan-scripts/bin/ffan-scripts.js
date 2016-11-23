@@ -7,8 +7,7 @@ var run = require('../scripts/run').default
 
 var scripts = {
   start : require('../scripts/start'),
-  build : require('../scripts/build'),
-  //test  : require('../scripts/test'),
+  new   : require('../scripts/newPage'),
   deploy: require('../scripts/deploy'),
 }
 
@@ -17,7 +16,7 @@ var commands = argv._
 var script = scripts[commands[0]]
 
 if (script) {
-  run(script)
+  run(script, argv)
 } else {
   console.log('-- invalid script --\n\n')
 }

@@ -5,25 +5,19 @@ import server from './server'
 import { getPageConfig } from './lib/validEntry'
 import paths from '../config/paths'
 
-export default async function start(_sourceDir) {
+export default async function start(argv) {
   try {
-    const sourceDir = _sourceDir || process.argv[3]
+    const pageName = argv['_'][1]
 
-    if (!sourceDir) {
-      console.error('-- source dir is empty! --')
+    if (!pageName) {
+      console.error('-- pageName is empty! --')
       return
     }
+    // clean
 
-    const config = await getPageConfig(sourceDir)
-
-    // await run(clean.bind(undefined, sourceDir))
-     await run(copy, {target: paths.appDevBuild})
-     //const serverConfig = await run(watch, config)
+    const config = await getPageConfig(pageName)
+    await run(copy, {target: paths.appDevBuild})
     await run(server, config)
-
-    // https://github.com/facebookincubator/create-react-app/issues/263
-    // https://github.com/facebookincubator/create-react-app/pull/744
-    // https://github.com/facebookincubator/create-react-app/pull/744/files
   } catch (e) {
     console.log(e)
   }

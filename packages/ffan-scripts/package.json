@@ -1,6 +1,6 @@
 {
   "name": "ffan-scripts",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "ffan-scripts",
   "bin": "bin/ffan-scripts.js",
   "scripts": {
