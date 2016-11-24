@@ -22,8 +22,8 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
       dirName      : name,
       devtool      : "#cheap-module-source-map",
       resolveLoader: {
-        modulesDirectories: [paths.ownNodeModules],
-        moduleTemplates: ['*-loader', '*']
+        modulesDirectories: paths.isInFfanScripts ? [paths.ownNodeModules] : [paths.appNodeModules],
+        moduleTemplates   : ['*-loader', '*']
       },
     },
     output   : {

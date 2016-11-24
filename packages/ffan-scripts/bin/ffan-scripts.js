@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
-require('babel-register')
+require('babel-register')({
+  only: /ffan-scripts/
+})
 require('babel-polyfill')
 
 var run = require('../scripts/run').default

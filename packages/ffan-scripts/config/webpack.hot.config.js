@@ -3,7 +3,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import webpack from 'webpack'
 import paths from './paths'
 import * as config from './webpack.common.config'
-
+import WatchMissingNodeModulesPlugin from './WatchMissingNodeModulesPlugin'
 
 export default function getConfig({name, html = {}, px2rem = {}, framework = 'jquery', isCDN = 'no'}) {
 
@@ -19,7 +19,7 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
       dirName      : name,
       devtool      : "#cheap-module-source-map",
       resolveLoader: {
-        modulesDirectories: [paths.ownNodeModules],
+        modulesDirectories: paths.isInFfanScripts ? [paths.ownNodeModules] : [paths.appNodeModules],
         moduleTemplates   : ['*-loader', '*']
       },
     },
@@ -46,6 +46,7 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
       }),
       new ExtractTextPlugin(`assets/css/${name}/[name].css`),
       new webpack.HotModuleReplacementPlugin(),
+      new WatchMissingNodeModulesPlugin(paths.appNodeModules),
     ]
   }
 
