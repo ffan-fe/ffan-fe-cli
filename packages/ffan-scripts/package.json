@@ -1,6 +1,6 @@
 {
   "name": "ffan-scripts",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "ffan-scripts",
   "bin": "bin/ffan-scripts.js",
   "scripts": {
@@ -19,6 +19,7 @@
   "dependencies": {
     "autoprefixer": "^6.4.1",
     "babel-cli": "^6.18.0",
+    "babel-loader": "^6.2.8",
     "babel-plugin-transform-runtime": "^6.15.0",
     "babel-polyfill": "^6.9.1",
     "babel-preset-latest": "^6.16.0",
