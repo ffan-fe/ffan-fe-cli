@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
+var isFfanScript = (__dirname.indexOf("/node_modules/ffan-scripts") !== -1)
+
 require('babel-register')({
-  only: /ffan-scripts/
+  only: isFfanScript  ? /ffan-scripts/ : undefined
 })
 require('babel-polyfill')
 

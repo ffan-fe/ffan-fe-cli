@@ -12,7 +12,21 @@ function resolveOwn(relativePath) {
   return path.resolve(__dirname, relativePath)
 }
 
+
+/**
+ * console.log(__dirname)
+ * - pack: ffan-fe-cli/packages/ffan-scripts/config
+ * - link: ffan-fe-cli/packages/ffan-scripts/config
+ * - real: {real_dir}/node_modules/ffan-scripts/config
+ *
+ * console.log(process.cwd())
+ * - pack: ffan-fe-cli/packages/ffan-scripts
+ * - link: wit120-source
+ * - real: wit120-source
+ */
+
 export const isInFfanScripts = process.cwd().indexOf(path.join('ffan-fe-cli', 'packages', 'ffan-scripts')) !== -1
+export const isInRealLink = __dirname.indexOf(path.join('node_modules', 'ffan-scripts/')) !== -1
 
 export default {
   appSrc          : isInFfanScripts ? resolveApp('commons/boilerplate') : resolveApp('src'),
@@ -25,6 +39,7 @@ export default {
   ownNodeModules  : resolveOwn('../node_modules'),
   resolve         : path.resolve,
   isInFfanScripts : isInFfanScripts,
+  isInRealLink    : isInRealLink,
 }
 
 

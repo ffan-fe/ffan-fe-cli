@@ -19,7 +19,7 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
       dirName      : name,
       devtool      : "#cheap-module-source-map",
       resolveLoader: {
-        modulesDirectories: paths.isInFfanScripts ? [paths.ownNodeModules] : [paths.appNodeModules],
+        modulesDirectories: paths.isInRealLink ? [paths.appNodeModules] : [paths.ownNodeModules] ,
         moduleTemplates   : ['*-loader', '*']
       },
     },
