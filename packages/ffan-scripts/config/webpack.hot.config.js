@@ -5,7 +5,7 @@ import paths from './paths'
 import * as config from './webpack.common.config'
 import WatchMissingNodeModulesPlugin from './WatchMissingNodeModulesPlugin'
 
-export default function getConfig({name, html = {}, px2rem = {}, framework = 'jquery', isCDN = 'no'}) {
+export default function getConfig({name, html = {}, px2rem = {}, framework = 'jquery', isCDN = 'no', vue = {}}) {
 
   // px2rem
   const px2remConfig = {
@@ -19,7 +19,7 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
       dirName      : name,
       devtool      : "#cheap-module-source-map",
       resolveLoader: {
-        modulesDirectories: paths.isInRealLink ? [paths.appNodeModules] : [paths.ownNodeModules] ,
+        modulesDirectories: paths.isInRealLink ? [paths.appNodeModules] : [paths.ownNodeModules],
         moduleTemplates   : ['*-loader', '*']
       },
     },
@@ -44,10 +44,12 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
         isCDN   : isCDN === 'yes',
         template: html.template || paths.resolve(paths.appHtmlTemplates, `${framework}Tpl.hbs`),
       }),
-      new ExtractTextPlugin(`assets/css/${name}/[name].css`),
+      new webpack.optimize.CommonsChunkPlugin('common.js'),
+      vue.router ? undefined : new ExtractTextPlugin(`assets/css/${name}/[name].css`, {
+      }),
       new webpack.HotModuleReplacementPlugin(),
       new WatchMissingNodeModulesPlugin(paths.appNodeModules),
-    ]
+    ].filter(p => !!p)
   }
 
 };
