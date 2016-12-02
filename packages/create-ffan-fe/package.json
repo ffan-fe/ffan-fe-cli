@@ -1,12 +1,18 @@
 {
-  "name": "@leiming/create-fe",
-  "version": "0.0.1",
+  "name": "create-ffan-fe",
+  "version": "0.0.3",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "bin": "./bin/create-ffan-fe.js",
+  "main": "./src/create.js",
   "keywords": [],
   "author": "leiming <poetcoders@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-stage-3": "^6.17.0",
+    "babel-register": "^6.18.0",
+    "fs-extra": "^1.0.0"
+  }
 }

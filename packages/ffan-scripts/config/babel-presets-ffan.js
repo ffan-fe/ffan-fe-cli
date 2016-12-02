@@ -6,6 +6,7 @@ module.exports = {
   "presets": [
     resolve('babel-preset-latest'),
     resolve('babel-preset-react'),
+    resolve('babel-preset-stage-2'),
     resolve('babel-preset-stage-3'),
   ],
   "plugins": [
