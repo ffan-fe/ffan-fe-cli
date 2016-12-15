@@ -26,14 +26,15 @@ const dependencies = {
   "vue"      : "^1.0.28"
 }
 
-export default function ({ name, namespace, ...rest }) {
+module.exports = function create({ name, namespace, cwd, ...rest }) {
+
   return new Promise((resolve, reject) => {
     if (!name || !namespace) {
       return reject(`name and namespace can not empty`)
     }
 
     try {
-      const root = path.resolve(`${name}-source`);
+      const root = path.resolve(cwd || '', `${name}-source`);
       fs.ensureDir(root)
       const commonPath = path.resolve(__dirname, '../commons')
       fs.copySync(commonPath, path.resolve(root, 'commons'))
