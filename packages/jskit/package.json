@@ -1,0 +1,26 @@
+{
+  "name": "ffan",
+  "version": "0.0.6",
+  "description": "",
+  "bin": "./bin/ffan.js",
+  "main": "./lib/create.js",
+  "keywords": [],
+  "scripts": {
+    "compile": "babel -d lib/ src/",
+    "prepublish": "npm run compile"
+  },
+  "author": "leiming <poetcoders@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "mocha": "^3.2.0"
+  },
+  "dependencies": {
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-stage-3": "^6.17.0",
+    "babel-register": "^6.18.0",
+    "fs-extra": "^1.0.0"
+  }
+}

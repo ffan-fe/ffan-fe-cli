@@ -13,4 +13,6 @@ npm-debug.log
 .DS_Store
 **/tmp
 
+*debug.log
+
 packages/abc/
