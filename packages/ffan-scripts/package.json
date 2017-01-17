@@ -1,6 +1,6 @@
 {
   "name": "build-kit",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "ffan-scripts",
   "bin": "bin/ffan-scripts.js",
   "scripts": {
