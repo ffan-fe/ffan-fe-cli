@@ -1,7 +1,6 @@
 import webpack from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
 import getip from './lib/ip.js'
-//import {resolve} from 'path'
 var colors = require('colors')
 import paths from '../config/paths'
 import { getEntry } from './lib/validEntry'
@@ -61,7 +60,7 @@ async function server(options) {
     noInfo        : true,
     proxy         : {
       '/zzq/*'        : {
-        target      : "http://h5.sit.ffan.com/",
+        target      : "", //special proxy domain example
         changeOrigin: true,
         secure      : false
       },

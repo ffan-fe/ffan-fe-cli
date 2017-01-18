@@ -3,7 +3,6 @@ function format(time) {
 }
 
 function run(fn, options) {
-  //options = JSON.stringify(options)
   const task = typeof fn.default === 'undefined' ? fn : fn.default;
   const start = new Date();
   console.log(

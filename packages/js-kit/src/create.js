@@ -31,11 +31,22 @@ const proConfig = {
   "upload-cdn-url": '' // uploading cdn url
 }
 
-module.exports = function create({ name, namespace, cwd, ...rest }) {
+const remotes = [
+  {
+    "name": "origin",
+    "url": "git@xxxx.git"
+  },
+  {
+    "name": "github",
+    "url": "git@xxxx.git"
+  }
+]
+
+module.exports = function create({ name, namespace = 'fe', cwd, ...rest }) {
 
   return new Promise((resolve, reject) => {
-    if (!name || !namespace) {
-      return reject(`name and namespace can not empty`)
+    if (!name) {
+      return reject(`project name can not empty`)
     }
 
     try {
@@ -52,7 +63,8 @@ module.exports = function create({ name, namespace, cwd, ...rest }) {
         scripts,
         devDependencies,
         dependencies,
-        proConfig
+        proConfig,
+        remotes
       })
 
       fs.writeFileSync(path.join(root, 'package.json'), JSON.stringify(packageFile, null, 2))
