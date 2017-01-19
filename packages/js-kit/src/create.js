@@ -15,7 +15,7 @@ const scripts = {
 }
 
 const devDependencies = {
-  "build-kit"      : "0.0.9",
+  "build-kit"      : "1.0.0",
   "vue-hot-reload-api": "^1.3.3",
 }
 
