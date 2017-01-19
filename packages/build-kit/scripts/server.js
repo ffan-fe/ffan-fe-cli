@@ -60,7 +60,7 @@ async function server(options) {
     noInfo        : true,
     proxy         : {
       '/zzq/*'        : {
-        target      : "", //special proxy domain example
+        target      : "http://www.baidu.com/", //special proxy domain example
         changeOrigin: true,
         secure      : false
       },

@@ -1,6 +1,6 @@
 {
   "name": "ffan",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "",
   "bin": "./bin/ffan.js",
   "main": "./lib/create.js",
