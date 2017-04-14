@@ -49,7 +49,7 @@ export function getLoaders(px2remConfig, includePath, name) {
       test  : /\.(png|jpg|gif|jpeg)$/,
       loader: "url",
       query : {
-        name : `assets/img/${name}/${name}_[hash:8].[ext]`,
+        name : `/assets/img/${name}/${name}_[hash:8].[ext]`,
         limit: 8192
       }
     },

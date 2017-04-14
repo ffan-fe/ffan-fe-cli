@@ -6,7 +6,6 @@ import * as config from './webpack.common.config'
 import { getPack } from './package'
 
 export default function getConfig({name, html = {}, px2rem = {}, framework = 'jquery', isCDN = 'no'}) {
-
   const pack = getPack()
   const localPublicPath = paths.resolve('/fe', pack['namespace'], pack['name'])
 
