@@ -26,7 +26,6 @@ const sendFile = (filePath, fileName, mime = 'text/plain') => {
       }
 
       if (typeof body === 'object' && body.data[0]) {
-        //console.log(JSON.stringify(body.data, null, 2))
         const cdnUrl = body.data[0]["10.213.19.144"]['url']
         console.log(`    ${filePath} \n => ${cdnUrl}`)
         return resolve(body.data)
@@ -69,7 +68,7 @@ async function sendByType(sourceDir, typePath) {
 
     if (sourceDirs.length) {
       for (let fileName of sourceDirs) {
-        const data = await sendFile(path.resolve(imageDir, fileName), typePath + fileName)
+        const data = await sendFile(path.resolve(imageDir, fileName), path.resolve('/' ,typePath, sourceDir, fileName))
         // TODO: 这个接口太慢了，所以我当批量接口发了
         //const data = sendFile(path.resolve(imageDir, fileName), typePath + fileName)
       }
