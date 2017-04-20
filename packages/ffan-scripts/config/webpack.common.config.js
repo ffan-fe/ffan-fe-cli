@@ -25,7 +25,8 @@ export const resolve = {
   }
 }
 
-export function getLoaders(px2remConfig, includePath, name) {
+export function getLoaders(px2remConfig, includePath, name, isProd) {
+
   return [
     {
       test   : /\.(vue)$/,
@@ -49,7 +50,7 @@ export function getLoaders(px2remConfig, includePath, name) {
       test  : /\.(png|jpg|gif|jpeg)$/,
       loader: "url",
       query : {
-        name : `/assets/img/${name}/${name}_[hash:8].[ext]`,
+        name : `${isProd ? '/' : ''}assets/img/${name}/${name}_[hash:8].[ext]`,
         limit: 8192
       }
     },

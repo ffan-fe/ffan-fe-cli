@@ -33,7 +33,7 @@ export default function getConfig({name, html = {}, px2rem = {}, framework = 'jq
     externals: config.externals,
     module   : {
       noParse: config.noParse,
-      loaders: config.getLoaders(px2remConfig, paths.appSrc, name),
+      loaders: config.getLoaders(px2remConfig, paths.appSrc, name, false),
       ...config.getModule(px2remConfig)
     },
     vue      : config.vueConfig,
